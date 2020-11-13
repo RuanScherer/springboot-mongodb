@@ -1,5 +1,6 @@
 package com.ruanscherer.springboot_mongodb.resources;
 
+import com.ruanscherer.springboot_mongodb.domain.Post;
 import com.ruanscherer.springboot_mongodb.domain.User;
 import com.ruanscherer.springboot_mongodb.dto.UserDTO;
 import com.ruanscherer.springboot_mongodb.services.UserService;
@@ -52,5 +53,11 @@ public class UserResource {
         user = userService.update(id, user);
         UserDTO response = new UserDTO(user);
         return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable final String id) {
+        User user = userService.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 }
