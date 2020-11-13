@@ -38,6 +38,22 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public User update(final String id, final User user) {
+        try {
+            User dbUser = userRepository.findById(id).get();
+            this.updateData(user, dbUser);
+            userRepository.save(dbUser);
+            return dbUser;
+        } catch (NoSuchElementException exception) {
+            throw new ObjectNotFoundException(exception.getMessage());
+        }
+    }
+
+    public void updateData(final User from, final User to) {
+        to.setName(from.getName());
+        to.setEmail(from.getEmail());
+    }
+
     public User fromDTO(UserDTO userDTO) {
         return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
     }
