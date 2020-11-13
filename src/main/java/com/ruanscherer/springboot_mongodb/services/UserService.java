@@ -1,6 +1,7 @@
 package com.ruanscherer.springboot_mongodb.services;
 
 import com.ruanscherer.springboot_mongodb.domain.User;
+import com.ruanscherer.springboot_mongodb.dto.UserDTO;
 import com.ruanscherer.springboot_mongodb.exceptions.ObjectNotFoundException;
 import com.ruanscherer.springboot_mongodb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,13 @@ public class UserService {
         } catch (NoSuchElementException exception) {
             throw new ObjectNotFoundException(exception.getMessage());
         }
+    }
+
+    public User insert(final User user) {
+        return userRepository.save(user);
+    }
+
+    public User fromDTO(UserDTO userDTO) {
+        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
     }
 }
