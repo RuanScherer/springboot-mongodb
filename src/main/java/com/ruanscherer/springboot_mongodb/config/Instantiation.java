@@ -2,6 +2,7 @@ package com.ruanscherer.springboot_mongodb.config;
 
 import com.ruanscherer.springboot_mongodb.domain.Post;
 import com.ruanscherer.springboot_mongodb.domain.User;
+import com.ruanscherer.springboot_mongodb.dto.AuthorDTO;
 import com.ruanscherer.springboot_mongodb.repositories.PostRepository;
 import com.ruanscherer.springboot_mongodb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class Instantiation implements CommandLineRunner {
                 sdf.parse("12/11/2020"),
                 "Estou indo viajar",
                 "Bali me aguarde!",
-                maria
+                new AuthorDTO(maria)
         );
         postRepository.save(post1);
     }
