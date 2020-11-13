@@ -3,6 +3,7 @@ package com.ruanscherer.springboot_mongodb.config;
 import com.ruanscherer.springboot_mongodb.domain.Post;
 import com.ruanscherer.springboot_mongodb.domain.User;
 import com.ruanscherer.springboot_mongodb.dto.AuthorDTO;
+import com.ruanscherer.springboot_mongodb.dto.CommentDTO;
 import com.ruanscherer.springboot_mongodb.repositories.PostRepository;
 import com.ruanscherer.springboot_mongodb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,11 @@ public class Instantiation implements CommandLineRunner {
 
         maria.getPosts().add(post1);
         userRepository.save(maria);
+
+        CommentDTO comment1 = new CommentDTO("Que demais!", sdf.parse("12/11/2020"), new AuthorDTO(alex));
+        CommentDTO comment2 = new CommentDTO("Me leva junto!", sdf.parse("12/11/2020"), new AuthorDTO(bob));
+
+        post1.getComments().addAll(Arrays.asList(comment1, comment2));
+        postRepository.save(post1);
     }
 }
